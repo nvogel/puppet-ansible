@@ -1,4 +1,3 @@
-puppet-ansible
-==============
+# Ansible
 
 Deploy Ansible

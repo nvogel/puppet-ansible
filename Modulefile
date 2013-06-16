@@ -1,0 +1,6 @@
+name         'nvogel-ansible'
+version      '0.0.1'
+license      'MIT'
+summary      'Ansible'
+description  'Ansible'
+project_page 'https://github.com/nvogel/puppet-ansible'
