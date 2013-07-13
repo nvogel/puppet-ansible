@@ -20,7 +20,7 @@
 #
 # == Example
 #
-# class { 'ansible::node' : 
+# class { 'ansible::node' :
 #   master  => 'master.fqdn.tld'
 # }
 #

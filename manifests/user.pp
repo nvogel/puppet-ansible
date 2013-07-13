@@ -15,7 +15,7 @@
 # By default, it's not possible to log as the ansible user with a password.
 #
 # == Parameter
-# 
+#
 # [*sudo*]
 # set to 'enable' if you want to authorize ansible user to behave like root
 #
