@@ -1,6 +1,6 @@
 name         'nvogel-ansible'
-version      '0.0.1'
+version      '1.0.0'
 license      'MIT'
 summary      'Ansible'
-description  'Ansible'
+description  'Allow ssh connections from an ansible central host to a pool of managed hosts'
 project_page 'https://github.com/nvogel/puppet-ansible'

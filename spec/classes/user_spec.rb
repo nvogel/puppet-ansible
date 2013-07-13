@@ -1,0 +1,62 @@
+require 'spec_helper'
+
+describe 'ansible::user' do
+
+  context 'When you add an ansible::user class' do
+
+    it 'an ansible user is created' do
+      should contain_user('ansible').with(
+        'ensure' => 'present',
+        'name'   => 'ansible',
+        'shell'  => '/bin/bash',
+        'managehome' => 'true'
+      )
+    end
+
+    it 'a /home/ansible/.ssh directory is created' do
+      should contain_file('/home/ansible/.ssh').with(
+        'ensure'  => 'directory',
+        'path'    => '/home/ansible/.ssh',
+        'owner'   => 'ansible',
+        'group'   => 'ansible',
+        'mode'    => '0700',
+        'notify'  => 'Exec[home_ansible_ssh_keygen]',
+        'require' => 'User[ansible]'
+     )
+    end
+
+    it 'a ansible user rsa key is created' do
+      should contain_exec('home_ansible_ssh_keygen').with(
+       'command' => 'ssh-keygen -t rsa -q -f /home/ansible/.ssh/id_rsa -N ""',
+       'creates' => '/home/ansible/.ssh/id_rsa',
+       'user'    => 'ansible'
+      )
+    end
+
+  end
+
+  context 'When you add an ansible user with sudo mode enable' do
+
+    let(:params) { {:sudo => 'enable' } }
+
+    it 'sudo software is present' do
+      should contain_exec('ansible_install_sudo').with(
+       'command' => '/usr/bin/apt-get install sudo',
+       'creates' => '/usr/bin/sudo'
+      )
+    end
+
+    it 'a /etc/sudoers.d/ansible file is created' do
+      should contain_file('/etc/sudoers.d/ansible').with(
+        'ensure'  => 'file',
+        'path'    => '/etc/sudoers.d/ansible',
+        'owner'   => 'root',
+        'group'   => 'root',
+        'mode'    => '0440',
+        'content' => 'ansible ALL = NOPASSWD : ALL'
+     )
+    end
+
+  end
+
+end
