@@ -11,12 +11,12 @@ so you've nothing to do except install ansible, and set your hosts inventory.
 In order to do that, this module deploy an user **ansible**.
 The ansible user is able to run commands as **root** with **sudo** :
 
-      su - ansible
-      ansible '*' --sudo -m ping
+    su - ansible
+    ansible '*' --sudo -m ping
 
 You can deploy python packages needed for ansible modules with ansible itself :
 
-      ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
+    ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
 
 ## Requirements
 
@@ -35,13 +35,13 @@ This module is only compatible (at this time) with a Debian os and puppet 2.7+.
 
 On the ansible master with a fqdn **master.fqdn.tld** :
 
-  include ansible::master
+    include ansible::master
 
 For each ansible node :
 
-  class { 'ansible::node' :
-    master  => 'master.fqdn.tld'
-  }
+    class { 'ansible::node' :
+      master  => 'master.fqdn.tld'
+    }
 
 You can have several ansible master hosts, each one will have its own pool of ansible nodes.
 
@@ -49,7 +49,7 @@ You will need to wait 2 runs of the puppet agent to complete the configuration p
 
 ## Developpment
 
-You're welcome to propose enhancements or submit bug reports (even typos on documentation).
+You're welcome to propose enhancements or submit bug reports (even typos).
 
 ### Branch management
 
@@ -69,23 +69,26 @@ All stable release are tagged.
 
 #### How to lint
 
-  cd /path/to/module/directory/ansible
-  rake lint
+    cd /path/to/module/directory/ansible
+    rake lint
 
 #### How to run rspec on the manifests
 
-  cd /path/to/module/directory/ansible
-  rake spec
+    cd /path/to/module/directory/ansible
+    rake spec
 
 #### How to check the documentation of the module
 
-  mkdir /tmp/doc
-  ln -s /path/to/module/directory/ansible /tmp/doc
-  touch /tmp/doc/manifest
-  puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
+    mkdir /tmp/doc
+    ln -s /path/to/module/directory/ansible /tmp/doc
+    touch /tmp/doc/manifest
+    puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
+
+## Licence
+
+Puppet ansible module is released under the MIT License. Check the LICENSE file for details.
 
 ## References
 
-- [puppet](http://puppetlabs.com/)
-- [ansible](http://www.ansibleworks.com/)
-- 
+- [puppet](http://puppetlabs.com)
+- [ansible](http://www.ansibleworks.com)
