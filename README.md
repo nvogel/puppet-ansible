@@ -70,6 +70,7 @@ You're welcome to propose enhancements or submit bug reports (even typos).
 ### Branch management
 
 Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
 
 The master branch corresponds to the release under development.
 All stable release are tagged.
