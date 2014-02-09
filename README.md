@@ -34,7 +34,11 @@ This module use puppetlabs-stdlib.
 
 ## Installation
 
-### With git
+### From the forge
+
+    Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
+
+### From github
 
 In your modules directory on the puppet master :
 
