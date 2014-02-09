@@ -1,35 +1,47 @@
 # Ansible puppet module
 
+## Definitions
+
+In the following :
+
+ - the **Ansible master** is the host where Ansible is installed
+ - the **Ansible nodes** are the hosts managed by the ansible master host
+
 ## Description
 
-The main goal of this ansible puppet module is to allow ssh connections
- from one central ansible machine to a pool of managed nodes.
+The goals of the ansible puppet module are :
 
-The module use **public key authentication** and manage the **/etc/ssh/ssh_known_hosts** file,
-so you've nothing to do except install ansible, and set your hosts inventory.
+ - to install ansible on the ansible master
+ - to allow ssh connections from the ansible master to a pool of ansible nodes 
 
-In order to do that, this module deploy an user **ansible**.
-The ansible user is able to run commands as **root** with **sudo** :
+The module use **public key authentication** and manage the **/etc/ssh/ssh_known_hosts** file of the ansible master.
+
+On all hosts, the module deploy an user **ansible**.
+
+The ansible user on the master is able to run commands on the ansible nodes as **root** with **sudo**.
+If needed, you can deploy python packages needed for ansible modules with ansible itself :
 
     su - ansible
-    ansible '*' --sudo -m ping
-
-You can deploy python packages needed for ansible modules with ansible itself :
-
     ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
 
 ## Requirements
 
 A puppet master with store config enable, because this module use exported ressources.
 
-This module is only compatible (at this time) with a Debian os and puppet 2.7+.
+This module is only compatible with a Debian squeeze or wheezy and puppet 2.7+.
+
+This module use puppetlabs-stdlib.
+
+## Installation
+
+### With git
+
+In your modules directory on the puppet master :
+
+    git clone git://github.com/nvogel/puppet-ansible.git ansible
+    git clone git://github.com/puppetlabs/puppetlabs-stdlib.git stdlib
 
 ## How to use the puppet ansible module
-
-### Definitions
-
- - **Ansible master** is the host where ansible is installed.
- - **Ansible nodes** are the hosts managed by the ansible master host.
 
 ### Usage
 

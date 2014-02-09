@@ -11,6 +11,7 @@
 # - create an ansible user with ssh rsa keys
 # - the ansible user public key is exported to all ansible nodes
 # - add all ansible nodes of the pool to the sshd_known_hosts file
+# - install ansible
 #
 # == Example
 #
@@ -20,6 +21,9 @@ class ansible::master {
 
   # Create ansible user
   include ansible::user
+
+  # Install Ansible
+  include ansible::install
 
   # Export ansible user public key if fact is defined
   if ( $::ansible_user_key != undef ) {

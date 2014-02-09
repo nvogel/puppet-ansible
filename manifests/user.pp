@@ -8,8 +8,9 @@
 #
 # This class enable the following features :
 #
+# - create an ansible user
 # - create rsa ssh keys
-# - run commands with sudo
+# - run commands with sudo (optional)
 #
 # The password is not managed by puppet.
 # By default, it's not possible to log as the ansible user with a password.
@@ -63,11 +64,8 @@ class ansible::user(
   # Enable sudo
   if $ansible::user::sudo == 'enable' {
 
-    # Install Sudo
-    exec { 'ansible_install_sudo':
-      command => '/usr/bin/apt-get install sudo',
-      creates => '/usr/bin/sudo'
-    }
+    # Install Sudo if it don't already exist
+    ensure_packages([ 'sudo' ])
 
     # Ansible user can do everything with sudo
     file { '/etc/sudoers.d/ansible' :
@@ -76,7 +74,7 @@ class ansible::user(
       owner   => 'root',
       group   => 'root',
       content => 'ansible ALL = NOPASSWD : ALL',
-      require => Exec[ansible_install_sudo]
+      require => Package['sudo']
     }
   }
 

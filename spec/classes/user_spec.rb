@@ -40,9 +40,8 @@ describe 'ansible::user' do
     let(:params) { {:sudo => 'enable' } }
 
     it 'sudo software is present' do
-      should contain_exec('ansible_install_sudo').with(
-       'command' => '/usr/bin/apt-get install sudo',
-       'creates' => '/usr/bin/sudo'
+      should contain_package('sudo').with(
+          'ensure' => 'present'
       )
     end
 
