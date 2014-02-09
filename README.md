@@ -36,7 +36,7 @@ This module use puppetlabs-stdlib.
 
 ### From the forge
 
-    Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
+Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
 
 ### From github
 
