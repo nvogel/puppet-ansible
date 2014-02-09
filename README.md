@@ -28,7 +28,7 @@ If needed, you can deploy python packages needed for ansible modules with ansibl
 
 A puppet master with store config enable, because this module use exported ressources.
 
-This module is only compatible with a Debian squeeze or wheezy and puppet 2.7+.
+This module is created for Debian (squeeze/wheezy) and compatible with puppet 2.7+.
 
 This module use puppetlabs-stdlib.
 
@@ -74,22 +74,30 @@ All stable release are tagged.
 
 #### Software required
 
+ - rake
  - puppet
  - rspec-puppet
  - puppetlabs_spec_helper
+ - puppet-syntax
  - puppet-lint
+
+### How to run syntax, lint and rspec
+
+    rake test
+
+#### How to check the syntax
+
+    rake syntax
 
 #### How to lint
 
-    cd /path/to/module/directory/ansible
     rake lint
 
 #### How to run rspec on the manifests
 
-    cd /path/to/module/directory/ansible
     rake spec
 
-#### How to check the documentation of the module
+#### How to generate the documentation of the module
 
     mkdir /tmp/doc
     ln -s /path/to/module/directory/ansible /tmp/doc
