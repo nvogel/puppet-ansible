@@ -5,12 +5,12 @@
 # Install Ansible
 #
 # == Description
-# 
+#
 # This class install the last version of ansible via pip
 #
 # == Examples
 #
-# include ansible::install 
+# include ansible::install
 #
 class ansible::install {
 
