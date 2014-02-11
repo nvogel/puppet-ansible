@@ -5,7 +5,7 @@ describe 'ansible::node' do
   context 'When you add an ansible::node class' do
     let(:params) { {:master => 'host.fqdn.tld'} }
 
-    it { should include_class('ansible::user') }
+    it { should contain_class('ansible::user') }
   end
 
   context 'When you add an ansible::node class without master parameter' do

@@ -4,7 +4,7 @@ describe 'ansible::master' do
 
   context "When you add an ansible::master class" do
 
-    it { should include_class('ansible::user') }
+    it { should contain_class('ansible::user') }
 
     it '' do
       should contain_file('/etc/ssh/ssh_known_hosts').with(
