@@ -2,7 +2,7 @@
 #
 # == Summary
 #
-# Configure a host which can be managed by an ansible master host
+# Configure a ansible node
 #
 # == Description
 #
@@ -13,10 +13,16 @@
 # - export host keys
 # - set the authorized_keys file with the public key of the ansible master node
 #
-# == Parameter
+# == Parameters
 #
 # [*master*]
 # The fqdn of the master host (**required**)
+#
+# [*sudo_command*]
+# This optional parameter define a list of one or more command names that can
+# be run by the ansible user as root.
+# See Cmnd_List definition from sudoers(5) for the syntax.
+# By default, the value is ALL so all commands can be run as root via sudo.
 #
 # == Example
 #
@@ -24,9 +30,17 @@
 #   master  => 'master.fqdn.tld'
 # }
 #
+# or
+#
+# class { 'ansible::node' :
+#   master       => 'master.fqdn.tld',
+#   sudo_command => '/etc/init.d/varnish, /etc/init.d/pound'
+# }
+#
 class ansible::node(
-  $master = 'none'
-  ){
+  $master = 'none',
+  $sudo_command = 'ALL'
+){
 
   if $ansible::node::master == 'none' {
     fail('master parameter must be set')
@@ -45,7 +59,8 @@ class ansible::node(
 
   # Create ansible user with sudo
   class { 'ansible::user' :
-    sudo => 'enable'
+    sudo         => 'enable',
+    sudo_command => $ansible::node::sudo_command
   }
 
 }

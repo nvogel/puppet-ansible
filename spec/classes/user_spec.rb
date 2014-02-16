@@ -51,9 +51,22 @@ describe 'ansible::user' do
         'path'    => '/etc/sudoers.d/ansible',
         'owner'   => 'root',
         'group'   => 'root',
-        'mode'    => '0440',
-        'content' => 'ansible ALL = NOPASSWD : ALL'
+        'mode'    => '0440'
      )
+    end
+
+    it do
+      should contain_file('/etc/sudoers.d/ansible').with_content(/^ansible ALL = NOPASSWD : ALL$/)
+    end
+
+  end
+  
+  context 'When you add an ansible user with sudo mode enable and a command /etc/init.d/varnish' do
+
+    let(:params) { {:sudo => 'enable', :sudo_command => '/etc/init.d/varnish' } }
+
+    it do
+      should contain_file('/etc/sudoers.d/ansible').with_content(/varnish$/)
     end
 
   end
