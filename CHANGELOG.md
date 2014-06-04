@@ -1,6 +1,3 @@
-
-* define the list of commands you can run with sudo on an ansible node
-
 2014-02-07 Release 1.1.0
 
 * install the last version of ansible on the master host

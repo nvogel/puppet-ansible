@@ -4,14 +4,14 @@
 
 In the following :
 
- - the **Ansible master** is the host where Ansible is installed
- - the **Ansible nodes** are the hosts managed by the ansible master host
+ - the **Ansible master** is the host where Ansible is installed and where you run your playbooks
+ - the **Ansible nodes** are the hosts managed by the ansible master
 
 ## Description
 
 The goals of the ansible puppet module are :
 
- - to install ansible on the ansible master
+ - to install [Ansible](http://www.ansibleworks.com) on the ansible master
  - to allow ssh connections from the ansible master to a pool of ansible nodes
  - to install and configure sudo on the ansible nodes
 
@@ -20,12 +20,6 @@ The module use **public key authentication** and manage the **/etc/ssh/ssh_known
 On all hosts, an user **ansible** is created.
 
 The ansible user on the master is able to run commands on the ansible nodes as **root** with **sudo**.
-If needed, you can deploy python packages needed for ansible modules with ansible itself :
-
-```bash
-su - ansible
-ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
-```
 
 ## Requirements
 
@@ -40,6 +34,8 @@ This module use puppetlabs-stdlib (4.1.x).
 Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
 
 ## How to use the puppet ansible module
+
+### Puppet side
 
 On the ansible master with a fqdn **master.fqdn.tld** :
 
@@ -59,13 +55,20 @@ You can have several ansible master hosts, each one will have its own pool of an
 
 You have to wait 2 runs of the puppet agent to complete the configuration process.
 
-You can define a list of commands to limit the use of sudo for the ansible user :
+### Ansible side
 
-```puppet
-class { 'ansible::node' :
-  master       => 'master.fqdn.tld',
-  sudo_command => '/etc/init.d/varnish, /etc/init.d/pound'
-}
+On the ansible master host, all you have to do is to use the ansible user.
+By default, there is no password for the ansible user so you have to be root to use this account.
+
+```bash
+su - ansible
+```
+
+On the ansible nodes, the only package installed is **sudo** so you can deploy python packages needed for ansible modules with ansible itself :
+
+```bash
+su - ansible
+ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
 ```
 
 ## Developpment
@@ -86,8 +89,9 @@ All stable release are tagged.
 ```bash
 gem install bundler
 mkdir modules
+cd modules
 git clone git://github.com/nvogel/puppet-ansible.git ansible
-cd modules/ansible
+cd ansible
 bundle install --path vendor/bundle
 ```
 
