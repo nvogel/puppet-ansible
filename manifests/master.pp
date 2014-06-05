@@ -40,9 +40,10 @@ class ansible::master {
 
   # Fix /etc/ssh/ssh_known_hosts permission
   # See http://projects.puppetlabs.com/issues/2014
-  file { '/etc/ssh/ssh_known_hosts' :
-      ensure  => file,
-      mode    => '0644'
-  }
+  ensure_resource('file', '/etc/ssh/ssh_known_hosts', {
+      'ensure'  => 'file',
+      'mode'    => '0644',
+    }
+  )
 
 }
