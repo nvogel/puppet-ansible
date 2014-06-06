@@ -1,5 +1,18 @@
 # Ansible puppet module
 
+* [Definitions](#Definitions)
+* [Description](#Description)
+* [Requirements](#Requirements)
+* [Installation from the forge](#installation-from-the-forge)
+* [How to use the puppet ansible module](#how-to-use-the-puppet-ansible-module)
+  - [Puppet side](#puppet-side)
+  - [Ansible side](#ansible-side)
+* [Development](#development)
+* [Documentation](#documentation)
+* [Credits](#credits)
+* [Licence](#licence)
+* [References](#references)
+
 ## Definitions
 
 In the following :
@@ -118,18 +131,18 @@ bundle exec rake
 ```bash
 bundle exec rake test
 ```
-##### How to check the syntax
+#### How to check the syntax
 
 ```bash
 bundle exec rake syntax
 ```
-##### How to lint
+#### How to lint
 
 ```bash
 bundle exec rake lint
 ```
 
-##### How to run rspec on the manifests
+#### How to run rspec on the manifests
 
 ```bash
 bundle exec rake spec
@@ -140,7 +153,7 @@ bundle exec rake spec
 ```bash
 bundle exec guard
 ```
-
+## Documentation
 ### How to generate the documentation of the module
 
 ```bash
@@ -150,7 +163,7 @@ touch /tmp/doc/manifest
 puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
 ```
 
-### Credits
+## Credits
 
 * Nicolas Vogel
 * [All contributors](https://github.com/nvogel/puppet-ansible/contributors)
