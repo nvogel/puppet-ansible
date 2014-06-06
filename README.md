@@ -1,8 +1,10 @@
 # Ansible puppet module
 
-* [Definitions](#Definitions)
-* [Description](#Description)
-* [Requirements](#Requirements)
+When puppet and ansible work together for better orchestration
+
+* [Definitions](#definitions)
+* [Description](#description)
+* [Requirements](#requirements)
 * [Installation from the forge](#installation-from-the-forge)
 * [How to use the puppet ansible module](#how-to-use-the-puppet-ansible-module)
   - [Puppet side](#puppet-side)
