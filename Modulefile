@@ -1,5 +1,5 @@
 name         'nvogel-ansible'
-version      '1.1.0'
+version      '1.1.1'
 license      'MIT'
 summary      'Ansible'
 description  'Install Ansible on a master host and allow ssh connections from it to a pool of managed hosts'

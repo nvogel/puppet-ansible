@@ -71,17 +71,28 @@ su - ansible
 ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
 ```
 
-## Developpment
+## Development
+
+### Contributing
 
 You're welcome to propose enhancements or submit bug reports (even typos).
+
+When you perform modifications inside the puppet module :
+
+ - You MUST run the test suite (see Testing section)
+ - You MUST write (or update) the test suite
+ - You MUST update the documentation
+
+Thanks in advance.
 
 ### Branch management
 
  - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
 
-The master branch corresponds to the release under development.
+The master branch corresponds to the release under development. Could be unstable.
 All stable release are tagged.
 
 ### Installation
@@ -95,35 +106,42 @@ cd ansible
 bundle install --path vendor/bundle
 ```
 
-### How to list the available tasks
+### Testing
+#### How to list the available tasks
 
 ```bash
 bundle exec rake
 ```
 
-### How to run syntax, lint and rspec
+#### How to run syntax, lint and rspec
 
 ```bash
 bundle exec rake test
 ```
-#### How to check the syntax
+##### How to check the syntax
 
 ```bash
 bundle exec rake syntax
 ```
-#### How to lint
+##### How to lint
 
 ```bash
 bundle exec rake lint
 ```
 
-#### How to run rspec on the manifests
+##### How to run rspec on the manifests
 
 ```bash
 bundle exec rake spec
 ```
 
-#### How to generate the documentation of the module
+#### How to run test automatically when you change any of the manifest
+
+```bash
+bundle exec guard
+```
+
+### How to generate the documentation of the module
 
 ```bash
 mkdir /tmp/doc
@@ -132,11 +150,10 @@ touch /tmp/doc/manifest
 puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
 ```
 
-#### How to run test automatically when you change any of the manifest
+### Credits
 
-```bash
-bundle exec guard
-```
+* Nicolas Vogel
+* [All contributors](https://github.com/nvogel/puppet-ansible/contributors)
 
 ## Licence
 
@@ -146,3 +163,5 @@ Puppet ansible module is released under the MIT License. Check the LICENSE file 
 
 - [puppet](http://puppetlabs.com)
 - [ansible](http://www.ansibleworks.com)
+- [contributing to open-source](https://guides.github.com/activities/contributing-to-open-source)
+- [about commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)

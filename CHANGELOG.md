@@ -1,3 +1,8 @@
+2014-06-07 Release 1.1.1
+
+* avoid duplicate for /etc/ssh/ssh_known_hosts resource
+* include metadata for puppet forge search
+
 2014-02-07 Release 1.1.0
 
 * install the last version of ansible on the master host
