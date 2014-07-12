@@ -1,5 +1,20 @@
 # Ansible puppet module
 
+When puppet and ansible work together for better orchestration
+
+* [Definitions](#definitions)
+* [Description](#description)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [How to use the puppet ansible module](#how-to-use-the-puppet-ansible-module)
+  - [Puppet side](#puppet-side)
+  - [Ansible side](#ansible-side)
+* [Development](#development)
+* [Documentation](#documentation)
+* [Credits](#credits)
+* [Licence](#licence)
+* [References](#references)
+
 ## Definitions
 
 In the following :
@@ -29,9 +44,17 @@ This module is created for Debian (Squeeze/Wheezy) and compatible with puppet (2
 
 This module use puppetlabs-stdlib (4.1.x).
 
-## Installation from the forge
+## Installation
 
-Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
+From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible).
+
+Or with [Librarian puppet](http://librarian-puppet.com/), for example add to your **Puppetfile** :
+
+```
+  mod 'ansible',
+    :git => 'https://github.com/nvogel/puppet-ansible',
+    :ref => '1.1.1'
+```
 
 ## How to use the puppet ansible module
 
@@ -71,17 +94,28 @@ su - ansible
 ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
 ```
 
-## Developpment
+## Development
+
+### Contributing
 
 You're welcome to propose enhancements or submit bug reports (even typos).
+
+When you perform modifications inside the puppet module :
+
+ - You MUST run the test suite (see Testing section)
+ - You MUST write (or update) the test suite
+ - You MUST update the documentation
+
+Thanks in advance.
 
 ### Branch management
 
  - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
 
-The master branch corresponds to the release under development.
+The master branch corresponds to the release under development. Could be unstable.
 All stable release are tagged.
 
 ### Installation
@@ -95,13 +129,14 @@ cd ansible
 bundle install --path vendor/bundle
 ```
 
-### How to list the available tasks
+### Testing
+#### How to list the available tasks
 
 ```bash
 bundle exec rake
 ```
 
-### How to run syntax, lint and rspec
+#### How to run syntax, lint and rspec
 
 ```bash
 bundle exec rake test
@@ -123,7 +158,13 @@ bundle exec rake lint
 bundle exec rake spec
 ```
 
-#### How to generate the documentation of the module
+#### How to run test automatically when you change any of the manifest
+
+```bash
+bundle exec guard
+```
+## Documentation
+### How to generate the documentation of the module
 
 ```bash
 mkdir /tmp/doc
@@ -132,11 +173,10 @@ touch /tmp/doc/manifest
 puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
 ```
 
-#### How to run test automatically when you change any of the manifest
+## Credits
 
-```bash
-bundle exec guard
-```
+* Nicolas Vogel
+* [All contributors](https://github.com/nvogel/puppet-ansible/contributors)
 
 ## Licence
 
@@ -146,3 +186,5 @@ Puppet ansible module is released under the MIT License. Check the LICENSE file 
 
 - [puppet](http://puppetlabs.com)
 - [ansible](http://www.ansibleworks.com)
+- [contributing to open-source](https://guides.github.com/activities/contributing-to-open-source)
+- [about commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
