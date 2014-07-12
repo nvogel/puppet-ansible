@@ -44,9 +44,17 @@ This module is created for Debian (Squeeze/Wheezy) and compatible with puppet (2
 
 This module use puppetlabs-stdlib (4.1.x).
 
-## Installation from the forge
+## Installation
 
-Go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
+From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible).
+
+Or with [Librarian puppet](http://librarian-puppet.com/), for example add to your **Puppetfile** :
+
+```
+  mod 'ansible',
+    :git => 'https://github.com/nvogel/puppet-ansible',
+    :ref => '1.1.1'
+```
 
 ## How to use the puppet ansible module
 
