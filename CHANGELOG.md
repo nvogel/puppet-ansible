@@ -1,3 +1,8 @@
+2014-10-?? Release 2.0.0
+
+* add an ansible class
+* change default password for ansible user
+
 2014-07-12 Release 1.1.1
 
 * avoid duplicate for /etc/ssh/ssh_known_hosts resource

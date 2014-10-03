@@ -53,20 +53,44 @@ Or with [Librarian puppet](http://librarian-puppet.com/), for example add to you
 ```
   mod 'ansible',
     :git => 'https://github.com/nvogel/puppet-ansible',
-    :ref => '1.1.1'
+    :ref => '2.0.0'
 ```
 
 ## How to use the puppet ansible module
 
 ### Puppet side
 
-On the ansible master with a fqdn **master.fqdn.tld** :
+On the ansible master with a fqdn **master.fqdn.tld** (you can use hieara, an enc, or a plain text manifest)
+
+```puppet
+include ansible
+```
+
+or
+
+```puppet
+class { 'ansible':
+  ensure => master
+}
+```
+
+or
 
 ```puppet
 include ansible::master
 ```
 
 For each ansible node :
+
+
+```puppet
+class { 'ansible':
+  ensure => node,
+  master => 'master.fqdn.tld'
+}
+```
+
+or
 
 ```puppet
 class { 'ansible::node' :
@@ -87,12 +111,8 @@ By default, there is no password for the ansible user so you have to be root to 
 su - ansible
 ```
 
-On the ansible nodes, the only package installed is **sudo** so you can deploy python packages needed for ansible modules with ansible itself :
-
-```bash
-su - ansible
-ansible 'all' --sudo -m shell -a 'aptitude -y install python-apt'
-```
+On the ansible nodes, the only package installed is **sudo**.
+So, you may have to deploy with ansible additional python packages wich are required for some ansible modules.
 
 ## Development
 
@@ -111,6 +131,7 @@ Thanks in advance.
 ### Branch management
 
  - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - Build status on release 2.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
