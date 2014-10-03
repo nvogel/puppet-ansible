@@ -19,6 +19,8 @@
 #
 class ansible::master {
 
+  include ansible::params
+
   # Create ansible user
   include ansible::user
 

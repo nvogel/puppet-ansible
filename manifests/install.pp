@@ -14,6 +14,8 @@
 #
 class ansible::install {
 
+  include ansible::params
+
   # Install packages
   ensure_packages(['python-yaml','python-jinja2','python-paramiko','python-markupsafe','python-pip'])
 

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ansible::user' do
 
   context 'When you add an ansible::user class' do
+    let(:facts) { {:osfamily => 'Debian' } }
 
     it 'an ansible user is created' do
       should contain_user('ansible').with(
@@ -38,6 +39,7 @@ describe 'ansible::user' do
 
   context 'When you add an ansible user with sudo mode enable' do
 
+    let(:facts) { {:osfamily => 'Debian' } }
     let(:params) { {:sudo => 'enable' } }
 
     it 'sudo software is present' do
@@ -60,6 +62,7 @@ describe 'ansible::user' do
   end
 
   context 'When you add an ansible::user class with a password parameter' do
+    let(:facts) { {:osfamily => 'Debian' } }
     let(:params) { {:password  => 'passwordhash' } }
 
     it 'an ansible user is created' do

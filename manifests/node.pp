@@ -28,6 +28,8 @@ class ansible::node(
   $master = 'none'
   ){
 
+  include ansible::params
+
   if $ansible::node::master == 'none' {
     fail('master parameter must be set')
   }

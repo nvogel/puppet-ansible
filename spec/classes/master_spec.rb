@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ansible::master' do
 
   context "When you add an ansible::master class" do
+    let(:facts) { {:osfamily => 'Debian' } }
 
     it { should contain_class('ansible::user') }
 

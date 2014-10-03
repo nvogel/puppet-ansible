@@ -35,6 +35,8 @@ class ansible::user(
   $password = '*NP*'
 ) {
 
+  include ansible::params
+
   # Create an 'ansible' user
   user { 'ansible':
     ensure     => present,

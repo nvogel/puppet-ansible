@@ -42,7 +42,7 @@ A puppet master with store config enable, because this module use exported resso
 
 This module is created for Debian (Squeeze/Wheezy) and compatible with puppet (2.7+).
 
-This module use puppetlabs-stdlib (4.1.x).
+This module use puppetlabs-stdlib (4.2.x).
 
 ## Installation
 
