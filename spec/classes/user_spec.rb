@@ -6,10 +6,11 @@ describe 'ansible::user' do
 
     it 'an ansible user is created' do
       should contain_user('ansible').with(
-        'ensure' => 'present',
-        'name'   => 'ansible',
-        'shell'  => '/bin/bash',
-        'managehome' => 'true'
+        'ensure'     => 'present',
+        'name'       => 'ansible',
+        'shell'      => '/bin/bash',
+        'managehome' => 'true',
+        'password'   => '*NP*'
       )
     end
 
@@ -54,6 +55,21 @@ describe 'ansible::user' do
         'mode'    => '0440',
         'content' => 'ansible ALL = NOPASSWD : ALL'
      )
+    end
+
+  end
+
+  context 'When you add an ansible::user class with a password parameter' do
+    let(:params) { {:password  => 'passwordhash' } }
+
+    it 'an ansible user is created' do
+      should contain_user('ansible').with(
+        'ensure'     => 'present',
+        'name'       => 'ansible',
+        'shell'      => '/bin/bash',
+        'managehome' => 'true',
+        'password'   => 'passwordhash'
+      )
     end
 
   end

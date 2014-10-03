@@ -12,7 +12,7 @@
 # - create rsa ssh keys
 # - run commands with sudo (optional)
 #
-# The password is not managed by puppet.
+# The password is managed by puppet.
 # By default, it's not possible to log as the ansible user with a password.
 #
 # == Parameter
@@ -31,7 +31,8 @@
 # include ansible::user
 #
 class ansible::user(
-  $sudo = 'disable'
+  $sudo = 'disable',
+  $password = '*NP*'
 ) {
 
   # Create an 'ansible' user
@@ -40,7 +41,8 @@ class ansible::user(
     comment    => 'ansible',
     managehome => true,
     shell      => '/bin/bash',
-    home       => '/home/ansible'
+    home       => '/home/ansible',
+    password   => $ansible::user::password
   }
 
   # Create a .ssh directory for the 'ansible' user
