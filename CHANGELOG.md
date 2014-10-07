@@ -1,17 +1,24 @@
-2014-10-?? Release 2.0.0
+# 2014-10-?? Release 2.0.0
+
+## Improvements
 
 * add an ansible class
-* change default password for ansible user
+* add a password parameter to the ansible::user class
+* add a provider parameter to the ansible::master class
 
-2014-07-12 Release 1.1.1
+## Breaking Change
+
+* change default password for the ansible user account (FIX #4)
+
+# 2014-07-12 Release 1.1.1
 
 * avoid duplicate for /etc/ssh/ssh_known_hosts resource
 
-2014-02-07 Release 1.1.0
+# 2014-02-07 Release 1.1.0
 
 * install the last version of ansible on the master host
 
-2013-07-13 Release 1.0.0
+# 2013-07-13 Release 1.0.0
 
 * create an user ansible
 * ansible user can optionally run commands with sudo

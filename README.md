@@ -105,7 +105,7 @@ You have to wait 2 runs of the puppet agent to complete the configuration proces
 ### Ansible side
 
 On the ansible master host, all you have to do is to use the ansible user.
-By default, there is no password for the ansible user so you have to be root to use this account.
+By default, the ansible user is set with a non valid password so you have to be root to use this account.
 
 ```bash
 su - ansible

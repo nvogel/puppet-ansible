@@ -11,10 +11,13 @@
 # - create an ansible master node, or
 # - create an ansible node wich is associated with a master node
 #
-# == Parameter
+# == Parameters
 #
 # [*ensure*]
-# master or node (**Default : master*) (**Optional**)
+# master or node (**string**) (**Default : master*) (**Optional**)
+# Supported values :
+#   **master** : deploy an ansible master
+#   **node** : deploy an ansible node
 #
 # [*master*]
 # The fqdn of the master host (**Required** if the host is an ansible **node**)
@@ -45,10 +48,12 @@ class ansible(
 
   include ansible::params
 
+  # if master only
   if ($ansible::ensure == 'master' and is_bool($ansible::master) and $ansible::master == false) {
     include ansible::master
   }
 
+  # if ansible node
   if $ansible::ensure == 'node' and is_string($ansible::master) {
     class { 'ansible::node' :
       master  => $ansible::master

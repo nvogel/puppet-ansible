@@ -11,13 +11,31 @@
 # - create an ansible user with ssh rsa keys
 # - the ansible user public key is exported to all ansible nodes
 # - add all ansible nodes of the pool to the sshd_known_hosts file
-# - install ansible
+# - install ansible (or not)
 #
-# == Example
+# == Parameter
+#
+# [*provider*]
+# Provider name used to install Ansible (**Default : pip**) (**Optional**)
+# Supported values :
+#   **pip** : install ansible via pip
+#   **manual** : don't install anything
+#
+# == Examples
+#
+# === Deploy an ansible master
 #
 #  include ansible::master
 #
-class ansible::master {
+# === Deploy an ansible master without ansible
+#
+# class { 'ansible::master' :
+#   provider  => 'manual'
+# }
+#
+class ansible::master(
+  $provider = 'pip'
+  ){
 
   include ansible::params
 
@@ -25,7 +43,17 @@ class ansible::master {
   include ansible::user
 
   # Install Ansible
-  include ansible::install
+  case $ansible::master::provider {
+    'pip': {
+      include ansible::install
+    }
+    'manual': {
+      # don't install anything on the master node
+    }
+    default : {
+      fail('Unsupported provider')
+    }
+  }
 
   # Export ansible user public key if fact is defined
   if ( $::ansible_user_key != undef ) {

@@ -14,6 +14,7 @@
 #
 # The password is managed by puppet.
 # By default, it's not possible to log as the ansible user with a password.
+# See shadow and sshd manpages for more information about locked account.
 #
 # == Parameter
 #
@@ -22,6 +23,8 @@
 #
 # == Examples
 #
+# === Create a ansible user with a non valid password
+#
 # class { 'ansible::user':
 #   sudo => 'enable'
 # }
@@ -29,6 +32,13 @@
 # or
 #
 # include ansible::user
+#
+# === Create a ansible user with a password
+#
+# class { 'ansible::user':
+#   sudo     => 'enable',
+#   password => '<aValidPasswordHash>'
+# }
 #
 class ansible::user(
   $sudo = 'disable',
