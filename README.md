@@ -44,7 +44,7 @@ This module is created for Debian (Squeeze/Wheezy) and compatible with puppet (2
 
 This module use puppetlabs-stdlib (4.2.x).
 
-## Installation
+## Installation and upgrade
 
 From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible).
 
@@ -55,6 +55,10 @@ Or with [Librarian puppet](http://librarian-puppet.com/), for example add to you
     :git => 'https://github.com/nvogel/puppet-ansible',
     :ref => '2.0.0'
 ```
+
+Each version number follows the rules defined by [semantic versioning](http://semver.org/).
+
+You should read the changelog file before upgrading to a new version and use only a tagged version with librarian.
 
 ## How to use the puppet ansible module
 
