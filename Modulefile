@@ -1,5 +1,5 @@
 name         'nvogel-ansible'
-version      '1.1.1'
+version      '2.0.0'
 license      'MIT'
 summary      'Ansible'
 description  'Orchestration of Puppet nodes with Ansible'
