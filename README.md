@@ -40,9 +40,9 @@ The ansible user on the master is able to run commands on the ansible nodes as *
 
 A puppet master with store config enable, because this module use exported ressources.
 
-This module is created for Debian (Squeeze/Wheezy) and compatible with puppet (2.7+).
+This module is created for Debian (Squeeze/Wheezy) and compatible with puppet agent (> 2.7).
 
-This module use puppetlabs-stdlib (4.2.x).
+This module use puppetlabs-stdlib (> 4.2.2).
 
 ## Installation and upgrade
 

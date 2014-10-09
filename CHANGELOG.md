@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 - change default password for the ansible user account (FIX #4)
 - limit module use to the debian familly operating systems
 
+### Dependency
+
+- change the minimal version needed for the puppetlabs-stdlib module (4.2.2)
+
 ## 2014-07-12 Release 1.1.1
 ### Improvements
 - avoid duplicate for /etc/ssh/ssh_known_hosts resource
