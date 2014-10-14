@@ -29,7 +29,6 @@ The goals of the ansible puppet module are :
  - to install [Ansible](http://www.ansibleworks.com) on the ansible master
  - to allow ssh connections from the ansible master to a pool of ansible nodes
  - to install and configure sudo on the ansible nodes
-
 The module use **public key authentication** and manage the **/etc/ssh/ssh_known_hosts** file of the ansible master.
 
 On all hosts, an user **ansible** is created.
@@ -64,7 +63,15 @@ You should read the changelog file before upgrading to a new version and use onl
 
 ### Puppet side
 
-On the ansible master with a fqdn **master.fqdn.tld** (you can use hieara, an enc, or a plain text manifest)
+On the ansible master with a fqdn **master.fqdn.tld**.
+
+You can use hieara, an enc, or a plain text manifest.
+
+You can have several ansible master hosts, each one will have its own pool of ansible nodes.
+
+You have to wait 2 runs of the puppet agent to complete the configuration process.
+
+#### Plain text manifest
 
 ```puppet
 include ansible
@@ -102,9 +109,54 @@ class { 'ansible::node' :
 }
 ```
 
-You can have several ansible master hosts, each one will have its own pool of ansible nodes.
+#### Hiera
 
-You have to wait 2 runs of the puppet agent to complete the configuration process.
+Example with a pool of hosts named **pool1**.
+
+Each host have the same value for the fact **pool1**.
+
+There is one host in the pool which is the ansible master (master.fqdn.tld).
+
+**hiera.yaml** :
+
+```yaml
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /etc/puppet/%{environment}/hieradata
+:hierarchy:
+  - "node/%{::clientcert}"
+  - "pool/%{::pool}"
+  - common
+```
+
+**hieradata directory** :
+
+```
+hieradata/
+├── pool
+│   └── pool1.yaml
+└── node
+    └── master.fqdn.tld.yaml
+```
+
+**pool1.yaml** :
+
+```yaml
+---
+classes: ansible
+ansible::ensure: node
+ansible::master: master.fqdn.tld
+```
+
+**master.fqdn.tld.yaml** :
+
+```yaml
+---
+ansible::ensure: master
+ansible::master: false
+```
 
 ### Ansible side
 
@@ -116,7 +168,7 @@ su - ansible
 ```
 
 On the ansible nodes, the only package installed is **sudo**.
-So, you may have to deploy with ansible additional python packages wich are required for some ansible modules.
+So, you may have to deploy with ansible additional python packages which are required for some ansible modules.
 
 ## Development
 
@@ -126,9 +178,9 @@ You're welcome to propose enhancements or submit bug reports (even typos).
 
 When you perform modifications inside the puppet module :
 
- - You MUST run the test suite (see Testing section)
- - You MUST write (or update) the test suite
- - You MUST update the documentation
+ - You **MUST** run the test suite (see Testing section)
+ - You **MUST** write (or update) the test suite
+ - You **MUST** update the documentation
 
 Thanks in advance.
 
@@ -192,10 +244,12 @@ bundle exec guard
 ### How to generate the documentation of the module
 
 ```bash
-mkdir /tmp/doc
-ln -s /path/to/module/directory/ansible /tmp/doc
-touch /tmp/doc/manifest
-puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc &> /dev/null && echo 'OK'
+mkdir -p /tmp/doc/ansible && touch /tmp/doc/manifest
+cd /path/to/module/directory/ansible
+ln -s "$(pwd)/lib" /tmp/doc/ansible
+ln -s "$(pwd)/manifests" /tmp/doc/ansible
+#generate module documentation in /path/to/ansible_doc from /tmp/doc
+bundle exec puppet doc --charset UTF-8 --outputdir /path/to/ansible_doc --mode rdoc --manifest /tmp/doc/manifest --modulepath /tmp/doc
 ```
 
 ## Credits
