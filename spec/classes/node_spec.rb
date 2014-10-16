@@ -3,12 +3,14 @@ require 'spec_helper'
 describe 'ansible::node' do
 
   context 'When you add an ansible::node class' do
+    let(:facts) { {:osfamily => 'Debian' } }
     let(:params) { {:master => 'host.fqdn.tld'} }
 
     it { should contain_class('ansible::user') }
   end
 
   context 'When you add an ansible::node class without master parameter' do
+    let(:facts) { {:osfamily => 'Debian' } }
 
     it do
       expect {

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'ansible::install' do
 
   context "When you add an ansible::install class" do
+    let(:facts) { {:osfamily => 'Debian' } }
 
     it { should contain_package('python-yaml')}
     it { should contain_package('python-jinja2')}

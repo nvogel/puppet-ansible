@@ -1,7 +1,0 @@
-name         'nvogel-ansible'
-version      '1.1.1'
-license      'MIT'
-summary      'Ansible'
-description  'Orchestration of Puppet nodes with Ansible'
-project_page 'https://github.com/nvogel/puppet-ansible'
-dependency   'puppetlabs/stdlib', '>= 4.1.0'

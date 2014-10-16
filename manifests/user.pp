@@ -12,8 +12,9 @@
 # - create rsa ssh keys
 # - run commands with sudo (optional)
 #
-# The password is not managed by puppet.
+# The password is managed by puppet.
 # By default, it's not possible to log as the ansible user with a password.
+# See shadow and sshd manpages for more information about locked account.
 #
 # == Parameter
 #
@@ -21,6 +22,8 @@
 # set to 'enable' if you want to authorize ansible user to behave like root
 #
 # == Examples
+#
+# === Create a ansible user with a non valid password
 #
 # class { 'ansible::user':
 #   sudo => 'enable'
@@ -30,9 +33,19 @@
 #
 # include ansible::user
 #
+# === Create a ansible user with a password
+#
+# class { 'ansible::user':
+#   sudo     => 'enable',
+#   password => '<aValidPasswordHash>'
+# }
+#
 class ansible::user(
-  $sudo = 'disable'
+  $sudo = 'disable',
+  $password = '*NP*'
 ) {
+
+  include ansible::params
 
   # Create an 'ansible' user
   user { 'ansible':
@@ -40,7 +53,8 @@ class ansible::user(
     comment    => 'ansible',
     managehome => true,
     shell      => '/bin/bash',
-    home       => '/home/ansible'
+    home       => '/home/ansible',
+    password   => $ansible::user::password
   }
 
   # Create a .ssh directory for the 'ansible' user
