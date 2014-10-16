@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2014-10-?? Release 2.0.0
+## 2014-10-16 Release 2.0.0
 ### Improvements
 - add an ansible class for managing both master and node
 - add a password parameter to the ansible::user class
