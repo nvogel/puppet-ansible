@@ -9,7 +9,21 @@
 #
 class ansible::params {
 
-  case $::osfamily {
+  # Support for Facter < 1.6.1
+  if $::osfamily == undef {
+    case $::operatingsystem {
+      'ubuntu', 'debian': {
+        $operatingsystemfamily = 'Debian'
+      }
+      default: {
+        $osfamily = $::operatingsystem
+      }
+    }
+  } else {
+    $operatingsystemfamily = $::osfamily
+  }
+
+  case $operatingsystemfamily {
     Debian: {
       #Set some variables
     }

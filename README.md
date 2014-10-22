@@ -187,6 +187,7 @@ Thanks in advance.
 ### Branch management
 
  - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - Build status on release 2.0.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 2.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)

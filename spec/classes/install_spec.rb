@@ -10,6 +10,7 @@ describe 'ansible::install' do
     it { should contain_package('python-paramiko')}
     it { should contain_package('python-markupsafe')}
     it { should contain_package('python-pip')}
+    it { should contain_package('python-crypto')}
 
     it 'ansible is present' do
       should contain_package('ansible').with(
