@@ -1,9 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2014-10-xx Release 2.0.1
+## 2014-10-22 Release 2.0.1
 ### Changes
-- install python-crypto package when installing ansible on the master (FIX #4)
+- install python-crypto package when installing ansible on the master (FIX #6)
+- add support for older version of facter (FIX #7)
 
 ## 2014-10-16 Release 2.0.0
 ### Improvements
