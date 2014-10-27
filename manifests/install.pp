@@ -6,13 +6,32 @@
 #
 # == Description
 #
-# This class install the last version of ansible via pip
+# This class install ansible via pip
+#
+# == Parameter
+#
+# [*version*]
+# Version of ansible (**Default : present**) (**Optional**)
+# Supported values :
+#  Any value supported by the puppet package type with the pip provider (latest, present, x.y.z, ...)
 #
 # == Examples
 #
+# === Install ansible if not present
+#
 # include ansible::install
 #
-class ansible::install {
+# ==== Install the last version of ansible
+#
+# class { 'ansible::install':
+#   version => latest
+# }
+#
+#
+#
+class ansible::install(
+  $version = present
+  ){
 
   include ansible::params
 
@@ -21,7 +40,7 @@ class ansible::install {
 
   # Install ansible
   package { 'ansible':
-    ensure   => present,
+    ensure   => $ansible::install::version,
     provider => 'pip'
   }
 

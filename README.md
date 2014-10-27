@@ -7,8 +7,14 @@ When puppet and ansible work together for better orchestration
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [How to use the puppet ansible module](#how-to-use-the-puppet-ansible-module)
-  - [Puppet side](#puppet-side)
-  - [Ansible side](#ansible-side)
+  - [Deploy ansible](#deploy-ansible)
+    - [Puppet side](#puppet-side)
+      - [Plain text manifest](#plain-text-manifest)
+      - [Hiera](#hiera)
+    - [Ansible side](#ansible-side)
+  - [Upgrade ansible](#upgrade-ansible)
+    - [Latest version](#latest-version)
+    - [Specific version](#specific-version)
 * [Development](#development)
 * [Documentation](#documentation)
 * [Credits](#credits)
@@ -61,7 +67,9 @@ You should read the changelog file before upgrading to a new version and use onl
 
 ## How to use the puppet ansible module
 
-### Puppet side
+### Deploy ansible
+
+#### Puppet side
 
 On the ansible master with a fqdn **master.fqdn.tld**.
 
@@ -71,7 +79,7 @@ You can have several ansible master hosts, each one will have its own pool of an
 
 You have to wait 2 runs of the puppet agent to complete the configuration process.
 
-#### Plain text manifest
+##### Plain text manifest
 
 ```puppet
 include ansible
@@ -109,7 +117,7 @@ class { 'ansible::node' :
 }
 ```
 
-#### Hiera
+##### Hiera
 
 Example with a pool of hosts named **pool1**.
 
@@ -158,7 +166,7 @@ ansible::ensure: master
 ansible::master: false
 ```
 
-### Ansible side
+#### Ansible side
 
 On the ansible master host, all you have to do is to use the ansible user.
 By default, the ansible user is set with a non valid password so you have to be root to use this account.
@@ -169,6 +177,33 @@ su - ansible
 
 On the ansible nodes, the only package installed is **sudo**.
 So, you may have to deploy with ansible additional python packages which are required for some ansible modules.
+
+### Upgrade ansible
+
+By default, puppet install the current version of ansible but will not upgrade it if already present.
+
+You can change ansible version by setting the **ansible::install::version** parameter.
+
+Example with hiera :
+
+#### Latest version
+
+```yaml
+---
+ansible::ensure: master
+ansible::master: false
+ansible::install::version: latest
+```
+
+#### Specific version
+
+```yaml
+---
+ansible::ensure: master
+ansible::master: false
+ansible::install::version: 1.7
+```
+
 
 ## Development
 
