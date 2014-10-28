@@ -30,18 +30,21 @@
 #
 #
 class ansible::install(
-  $version = present
+  $version = present,
+  $provider= pip,
   ){
 
   include ansible::params
 
   # Install packages
-  ensure_packages(['python-yaml','python-jinja2','python-paramiko','python-markupsafe','python-pip','python-crypto'])
+  if $ansible::install::provider == 'pip' {
+    ensure_packages(['python-yaml','python-jinja2','python-paramiko','python-markupsafe','python-pip','python-crypto'])
+  }
 
   # Install ansible
   package { 'ansible':
     ensure   => $ansible::install::version,
-    provider => 'pip'
+    provider => $ansible::install::provider
   }
 
 }

@@ -47,6 +47,11 @@ class ansible::master(
     'pip': {
       include ansible::install
     }
+    'apt': {
+      class { 'ansible::install':
+        provider => 'apt'
+      }
+    }
     'manual': {
       # don't install anything on the master node
     }
