@@ -15,7 +15,21 @@
         "6",
         "7"
       ]
-    }
+   },
+   {
+     "operatingsystem": "CentOS",
+     "operatingsystemrelease": [
+      "6",
+      "7"
+      ]
+   },
+   {
+     "operatingsystem": "Ubuntu",
+     "operatingsystemrelease": [
+       "12.04",
+       "14.04"
+       ]
+   }
   ],
  "requirements": [
     {

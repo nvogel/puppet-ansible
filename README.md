@@ -49,6 +49,14 @@ This module is created for Debian (Squeeze/Wheezy) and compatible with puppet ag
 
 This module use puppetlabs-stdlib (> 4.2.2).
 
+The module has been tested on:
+
+ - Debian 6
+ - Debian 7
+
+This module could be used on Ubuntu or CentOs (actually Debian and RedHat operating system family),
+but tests has been light and support cannot be guaranteed.
+
 ## Installation and upgrade
 
 From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible).
