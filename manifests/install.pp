@@ -15,19 +15,30 @@
 # Supported values :
 #  Any value supported by the puppet package type with the pip provider (latest, present, x.y.z, ...)
 #
+# [*provider*]
+# Provider (**Default : pip**) (**Optional**)
+# Supported values :
+#   **pip** : install ansible via pip
+#   **apt** : install ansible via apt
+#
 # == Examples
 #
-# === Install ansible if not present
+# === Install ansible if not present via pip provider
 #
 # include ansible::install
 #
-# ==== Install the last version of ansible
+# ==== Install ansible 1.7.2 via pip provider
 #
 # class { 'ansible::install':
-#   version => latest
+#   version => '1.7.2'
 # }
 #
+# ==== Install last version of ansible via apt
 #
+# class { 'ansible::install':
+#   version  => latest,
+#   provider => apt
+# }
 #
 class ansible::install(
   $version = present,

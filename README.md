@@ -79,6 +79,8 @@ You can have several ansible master hosts, each one will have its own pool of an
 
 You have to wait 2 runs of the puppet agent to complete the configuration process.
 
+Ansible is installed by default by pip, the provider parameter could be changed with apt.
+
 ##### Plain text manifest
 
 ```puppet
@@ -93,10 +95,12 @@ class { 'ansible':
 }
 ```
 
-or
+or if you want to use the apt provider
 
 ```puppet
-include ansible::master
+include { 'ansible::master':
+    provider => apt
+}
 ```
 
 For each ansible node :
@@ -186,24 +190,24 @@ You can change ansible version by setting the **ansible::install::version** para
 
 Example with hiera :
 
-#### Latest version
+#### Latest version with apt
 
 ```yaml
 ---
 ansible::ensure: master
 ansible::master: false
+ansible::master::provider: apt
 ansible::install::version: latest
 ```
 
-#### Specific version
+#### Specific version with pip
 
 ```yaml
 ---
 ansible::ensure: master
 ansible::master: false
-ansible::install::version: 1.7
+ansible::install::version: 1.7.1
 ```
-
 
 ## Development
 
@@ -222,6 +226,7 @@ Thanks in advance.
 ### Branch management
 
  - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - Build status on release 2.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 2.0.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 2.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
