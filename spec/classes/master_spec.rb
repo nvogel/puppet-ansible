@@ -25,6 +25,17 @@ describe 'ansible::master' do
     it { should_not  contain_class('ansible::install') }
   end
 
+  context "When you add an ansible::master class with the apt provider" do
+    let(:facts) { {:osfamily => 'Debian' } }
+    let(:params) { {:provider  => 'apt'} } 
+
+    it 'ansible is present and installed via apt' do
+      should contain_class('ansible::install').with(
+          'provider' => 'apt'
+      )
+    end
+  end
+
   context "When you add an ansible::master class with non supported provider" do
     let(:facts) { {:osfamily => 'Debian' } }
     let(:params) { {:provider  => 'anonsupportedprovider'} } 
