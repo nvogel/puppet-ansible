@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2014-MM-DD Release 2.1.0
+- add support for installing ansible with apt
+- add support for choosing the version of ansible
+
 ## 2014-10-22 Release 2.0.1
 ### Changes
 - install python-crypto package when installing ansible on the master (FIX #6)
