@@ -13,8 +13,7 @@ When puppet and ansible work together for better orchestration
       - [Hiera](#hiera)
     - [Ansible side](#ansible-side)
   - [Upgrade ansible](#upgrade-ansible)
-    - [Latest version](#latest-version)
-    - [Specific version](#specific-version)
+  - [Manage playbooks](#manage-playbooks)
 * [Development](#development)
 * [Documentation](#documentation)
 * [Credits](#credits)
@@ -215,6 +214,25 @@ ansible::install::version: latest
 ansible::ensure: master
 ansible::master: false
 ansible::install::version: 1.7.1
+```
+
+### Manage playbooks
+
+You can define a directory owned by the user ansible where you can store your playbooks (by default **/etc/ansible**).
+
+For examples:
+
+```yaml
+---
+classes: ansible::playbooks
+ansible::ensure: master
+ansible::master: false
+```
+
+or
+
+```puppet
+include ansible::playbooks
 ```
 
 ## Development
