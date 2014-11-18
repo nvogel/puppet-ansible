@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## 2014-MM-DD Release 2.1.0
 - add support for installing ansible with apt
 - add support for choosing the version of ansible
+- add a playbooks class for managing ansible configuration and playbooks
 
 ## 2014-10-22 Release 2.0.1
 ### Changes
@@ -15,7 +16,7 @@ All notable changes to this project will be documented in this file.
 - add an ansible class for managing both master and node
 - add a password parameter to the ansible::user class
 - add a provider parameter to the ansible::master class
-- add a ansible::params class
+- add an ansible::params class
 
 ### Breaking Changes
 - change default password for the ansible user account (FIX #4)
