@@ -132,7 +132,7 @@ class { 'ansible::node' :
 
 Example with a pool of hosts named **pool1**.
 
-Each host have the same value for the fact **pool1**.
+Each host have the same value for the fact **pool**.
 
 There is one host in the pool which is the ansible master (master.fqdn.tld).
 
