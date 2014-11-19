@@ -50,7 +50,7 @@ class ansible::install(
   # Install packages
   if $ansible::install::provider == 'pip' {
     ensure_packages(['python-yaml','python-jinja2','python-paramiko',
-      'python-pkg-resources','python-pip','python-crypto',
+      'python-pkg-resources','python-pip','python-crypto','python-markupsafe',
       'python-httplib2'], {'before' => Package['ansible']})
   }
 
