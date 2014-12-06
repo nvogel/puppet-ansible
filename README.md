@@ -213,7 +213,7 @@ ansible::install::version: latest
 ---
 ansible::ensure: master
 ansible::master: false
-ansible::install::version: 1.7.1
+ansible::install::version: "1.8"
 ```
 
 ### Manage playbooks
