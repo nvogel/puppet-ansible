@@ -1,4 +1,6 @@
-# Ansible puppet module [![puppet forge version](https://img.shields.io/puppetforge/v/nvogel/ansible.svg)](http://forge.puppetlabs.com/nvogel/ansible) [![last tag](https://img.shields.io/github/tag/nvogel/puppet-ansible.svg)](https://github.com/nvogel/puppet-ansible/tags)
+# Ansible puppet module
+
+[![puppet forge version](https://img.shields.io/puppetforge/v/nvogel/ansible.svg)](http://forge.puppetlabs.com/nvogel/ansible) [![last tag](https://img.shields.io/github/tag/nvogel/puppet-ansible.svg)](https://github.com/nvogel/puppet-ansible/tags)
 
 When puppet and ansible work together for better orchestration
 
