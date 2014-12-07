@@ -6,18 +6,21 @@
 #
 # == Description
 #
-# This class install ansible via pip
+# This class install ansible
 #
-# == Parameter
+# == Parameters
 #
 # [*version*]
 # Version of ansible (**Default : present**) (**Optional**)
 # Supported values :
-#  Any value supported by the puppet package type with the pip provider (latest, present, x.y.z, ...)
+#  Any value supported by the ensure attibute of the puppet package type
+#  For example : latest, present, x.y.z
 #
 # [*provider*]
 # Provider (**Default : pip**) (**Optional**)
 # Supported values :
+#  Any value supported by the provider attribute of the puppet package type
+# Recommended values :
 #   **pip** : install ansible via pip
 #   **apt** : install ansible via apt
 #
