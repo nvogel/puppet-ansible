@@ -27,6 +27,9 @@ class ansible::params {
     Debian: {
       #Set some variables
     }
+    Redhat: {
+      #Set some variables for redhat
+    }
     default : {
       fail("Unsupported platform: ${::osfamily}/${::operatingsystem}")
     }

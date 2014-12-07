@@ -1,14 +1,20 @@
-# Ansible puppet module
+# Ansible puppet module [![puppet forge version](https://img.shields.io/puppetforge/v/nvogel/ansible.svg)](http://forge.puppetlabs.com/nvogel/ansible) [![last tag](https://img.shields.io/github/tag/nvogel/puppet-ansible.svg)](https://github.com/nvogel/puppet-ansible/tags)
 
 When puppet and ansible work together for better orchestration
+
 
 * [Definitions](#definitions)
 * [Description](#description)
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [How to use the puppet ansible module](#how-to-use-the-puppet-ansible-module)
-  - [Puppet side](#puppet-side)
-  - [Ansible side](#ansible-side)
+  - [Deploy ansible](#deploy-ansible)
+    - [Puppet side](#puppet-side)
+      - [Plain text manifest](#plain-text-manifest)
+      - [Hiera](#hiera)
+    - [Ansible side](#ansible-side)
+  - [Upgrade ansible](#upgrade-ansible)
+  - [Manage playbooks](#manage-playbooks)
 * [Development](#development)
 * [Documentation](#documentation)
 * [Credits](#credits)
@@ -43,16 +49,25 @@ This module is created for Debian (Squeeze/Wheezy) and compatible with puppet ag
 
 This module use puppetlabs-stdlib (> 4.2.2).
 
-## Installation and upgrade
+The module has been tested on:
 
-From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible).
+ - Debian 6
+ - Debian 7
+
+This module could be used on Ubuntu or CentOs (actually Debian and RedHat operating system family),
+but tests has been light and support cannot be guaranteed.
+
+## Installation and upgrade
+[![puppet forge version](https://img.shields.io/puppetforge/v/nvogel/ansible.svg)](http://forge.puppetlabs.com/nvogel/ansible) [![last tag](https://img.shields.io/github/tag/nvogel/puppet-ansible.svg)](https://github.com/nvogel/puppet-ansible/tags)
+
+From the forge, go to [nvogel/ansible](http://forge.puppetlabs.com/nvogel/ansible)
 
 Or with [Librarian puppet](http://librarian-puppet.com/), for example add to your **Puppetfile** :
 
 ```
   mod 'ansible',
     :git => 'https://github.com/nvogel/puppet-ansible',
-    :ref => '2.0.0'
+    :ref => '2.1.0'
 ```
 
 Each version number follows the rules defined by [semantic versioning](http://semver.org/).
@@ -61,9 +76,11 @@ You should read the changelog file before upgrading to a new version and use onl
 
 ## How to use the puppet ansible module
 
-### Puppet side
+### Deploy ansible
 
-On the ansible master with a fqdn **master.fqdn.tld**.
+#### Puppet side
+
+Imagine you want to install Ansible on a host named **master.fqdn.tld**.
 
 You can use hieara, an enc, or a plain text manifest.
 
@@ -71,7 +88,9 @@ You can have several ansible master hosts, each one will have its own pool of an
 
 You have to wait 2 runs of the puppet agent to complete the configuration process.
 
-#### Plain text manifest
+Ansible is installed by default by pip, the provider parameter could be changed with apt.
+
+##### Plain text manifest
 
 ```puppet
 include ansible
@@ -85,10 +104,12 @@ class { 'ansible':
 }
 ```
 
-or
+or if you want to use the apt provider
 
 ```puppet
-include ansible::master
+include { 'ansible::master':
+    provider => apt
+}
 ```
 
 For each ansible node :
@@ -109,11 +130,11 @@ class { 'ansible::node' :
 }
 ```
 
-#### Hiera
+##### Hiera
 
 Example with a pool of hosts named **pool1**.
 
-Each host have the same value for the fact **pool1**.
+Each host have the same value for the fact **pool**.
 
 There is one host in the pool which is the ansible master (master.fqdn.tld).
 
@@ -158,7 +179,7 @@ ansible::ensure: master
 ansible::master: false
 ```
 
-### Ansible side
+#### Ansible side
 
 On the ansible master host, all you have to do is to use the ansible user.
 By default, the ansible user is set with a non valid password so you have to be root to use this account.
@@ -168,7 +189,53 @@ su - ansible
 ```
 
 On the ansible nodes, the only package installed is **sudo**.
-So, you may have to deploy with ansible additional python packages which are required for some ansible modules.
+So, you may have to deploy additional python packages which are required for some ansible modules.
+
+### Upgrade ansible
+
+By default, puppet install the current version of ansible but will not upgrade it if already present.
+
+You can change ansible version by setting the **ansible::install::version** parameter.
+
+Example with hiera :
+
+#### Latest version with apt
+
+```yaml
+---
+ansible::ensure: master
+ansible::master: false
+ansible::master::provider: apt
+ansible::install::version: latest
+```
+
+#### Specific version with pip
+
+```yaml
+---
+ansible::ensure: master
+ansible::master: false
+ansible::install::version: "1.8"
+```
+
+### Manage playbooks
+
+You can define a directory owned by the user ansible where you can store your playbooks (by default **/etc/ansible**).
+
+For examples:
+
+```yaml
+---
+classes: ansible::playbooks
+ansible::ensure: master
+ansible::master: false
+```
+
+or
+
+```puppet
+include ansible::playbooks
+```
 
 ## Development
 
@@ -186,12 +253,13 @@ Thanks in advance.
 
 ### Branch management
 
- - Build status on branch master : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
- - Build status on release 2.0.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
- - Build status on release 2.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
- - Build status on release 1.1.1 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
- - Build status on release 1.1.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
- - Build status on release 1.0.0 : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on branch master](http://img.shields.io/badge/branch-master-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 2.1.0](http://img.shields.io/badge/branch-v2.1.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 2.0.1](http://img.shields.io/badge/branch-v2.0.1-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 2.0.0](http://img.shields.io/badge/branch-v2.0.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 1.1.1](http://img.shields.io/badge/branch-v1.1.1-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 1.1.0](http://img.shields.io/badge/branch-v1.1.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 1.0.0](http://img.shields.io/badge/branch-v1.0.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
 
 The master branch corresponds to the release under development. Could be unstable.
 All stable release are tagged.
