@@ -1,7 +1,8 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## 2014-MM-DD Release 2.1.0
+## 2014-12-07 Release 2.1.0
+### Improvements
 - add support for installing ansible with apt
 - add support for choosing the version of ansible
 - add a playbooks class for managing ansible configuration and playbooks
