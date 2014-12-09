@@ -26,21 +26,24 @@
 #
 # == Examples
 #
-# === Install ansible if not present via pip provider
+# === Install ansible if not present via the pip provider
 #
 # include ansible::install
 #
-# ==== Install ansible 1.7.2 via pip provider
+# ==== Install ansible 1.7.2 via the pip provider
 #
 # class { 'ansible::install':
-#   version => '1.7.2'
+#   version  => '1.7.2',
+#   provider => 'pip'
 # }
 #
-# ==== Install last version of ansible via apt
+# ==== Install last version of ansible
+#
+# Use the appropriate provider for your platform
 #
 # class { 'ansible::install':
 #   version  => latest,
-#   provider => apt
+#   provider => default
 # }
 #
 class ansible::install(
@@ -52,15 +55,23 @@ class ansible::install(
 
   # Install packages
   if $ansible::install::provider == 'pip' {
-    ensure_packages(['python-yaml','python-jinja2','python-paramiko',
-      'python-pkg-resources','python-pip','python-crypto','python-markupsafe',
-      'python-httplib2'], {'before' => Package['ansible']})
-  }
 
-  # Install ansible
-  package { 'ansible':
-    ensure   => $ansible::install::version,
-    provider => $ansible::install::provider
+    if empty($ansible::params::ip_dep_package) {
+      fail("Unsupported platform: ${::osfamily}/${::operatingsystem} for pip")
+    } else {
+      ensure_packages($ansible::params::pip_dep_package,
+        {'before' => Package['ansible']})
+
+      package { 'ansible':
+        ensure   => $ansible::install::version,
+        provider => $ansible::install::provider
+      }
+    }
+  } else {
+    # Install ansible
+    package { 'ansible':
+      ensure   => $ansible::install::version
+    }
   }
 
 }
