@@ -49,7 +49,8 @@ class ansible(
   include ansible::params
 
   # if master only
-  if ($ansible::ensure == 'master' and is_bool($ansible::master) and $ansible::master == false) {
+  if ($ansible::ensure == 'master' and is_bool($ansible::master) and
+    $ansible::master == false) {
     include ansible::master
   }
 
