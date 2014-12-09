@@ -19,10 +19,8 @@
 # [*provider*]
 # Provider (**Default : pip**) (**Optional**)
 # Supported values :
-#  Any value supported by the provider attribute of the puppet package type
-# Recommended values :
 #   **pip** : install ansible via pip
-#   **apt** : install ansible via apt
+#   **default** : let puppet guess the appropriate provider of the platform
 #
 # == Examples
 #
@@ -30,16 +28,15 @@
 #
 # include ansible::install
 #
-# ==== Install ansible 1.7.2 via the pip provider
+# ==== Install ansible 1.8.2 via the pip provider
 #
 # class { 'ansible::install':
-#   version  => '1.7.2',
-#   provider => 'pip'
+#   version  => '1.8.2'
 # }
 #
 # ==== Install last version of ansible
 #
-# Use the appropriate provider for your platform
+# Install ansible with the appropriate provider for your platform
 #
 # class { 'ansible::install':
 #   version  => latest,
@@ -53,22 +50,21 @@ class ansible::install(
 
   include ansible::params
 
-  # Install packages
   if $ansible::install::provider == 'pip' {
-
-    if empty($ansible::params::ip_dep_package) {
-      fail("Unsupported platform: ${::osfamily}/${::operatingsystem} for pip")
+    # Install ansible with pip
+    if empty($ansible::params::pip_dep_package) {
+      fail('Unsupported platform for pip install ansible')
     } else {
       ensure_packages($ansible::params::pip_dep_package,
         {'before' => Package['ansible']})
 
       package { 'ansible':
         ensure   => $ansible::install::version,
-        provider => $ansible::install::provider
+        provider => 'pip'
       }
     }
   } else {
-    # Install ansible
+    # Install ansible with the default provider
     package { 'ansible':
       ensure   => $ansible::install::version
     }
