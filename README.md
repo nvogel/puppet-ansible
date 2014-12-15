@@ -256,7 +256,8 @@ Thanks in advance.
 ### Branch management
 
  - ![Build status on branch master](http://img.shields.io/badge/branch-master-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=master)](https://travis-ci.org/nvogel/puppet-ansible)
- - ![Build status on release 2.1.0](http://img.shields.io/badge/branch-v2.1.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 3.0.0](http://img.shields.io/badge/branch-v3.0.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v3.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
+ - ![Build status on release 2.1.0](http://img.shields.io/badge/branch-v2.1.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.1.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - ![Build status on release 2.0.1](http://img.shields.io/badge/branch-v2.0.1-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.1)](https://travis-ci.org/nvogel/puppet-ansible)
  - ![Build status on release 2.0.0](http://img.shields.io/badge/branch-v2.0.0-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v2.0.0)](https://travis-ci.org/nvogel/puppet-ansible)
  - ![Build status on release 1.1.1](http://img.shields.io/badge/branch-v1.1.1-lightgrey.svg) : [![Build Status](https://travis-ci.org/nvogel/puppet-ansible.png?branch=v1.1.1)](https://travis-ci.org/nvogel/puppet-ansible)
