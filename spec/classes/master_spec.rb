@@ -27,11 +27,11 @@ describe 'ansible::master' do
 
   context "When you add an ansible::master class with the default provider" do
     let(:facts) { {:osfamily => 'Debian' } }
-    let(:params) { {:provider  => 'default'} } 
+    let(:params) { {:provider  => 'automatic'} } 
 
     it 'ansible is present and installed via apt' do
       should contain_class('ansible::install').with(
-          'provider' => 'default'
+          'provider' => 'automatic'
       )
     end
   end

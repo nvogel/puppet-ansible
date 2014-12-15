@@ -20,7 +20,7 @@
 # Provider (**Default : pip**) (**Optional**)
 # Supported values :
 #   **pip** : install ansible via pip
-#   **default** : let puppet guess the appropriate provider of the platform
+#   **automatic** : let puppet guess the appropriate provider of the platform
 #
 # == Examples
 #
@@ -40,7 +40,7 @@
 #
 # class { 'ansible::install':
 #   version  => latest,
-#   provider => default
+#   provider => automatic
 # }
 #
 class ansible::install(

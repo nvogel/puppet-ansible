@@ -19,7 +19,7 @@
 # Provider name used to install Ansible (**Default : pip**) (**Optional**)
 # Supported values :
 #   **pip** : install ansible via pip
-#   **default** : install ansible via the appropriate provider for the platform
+#   **automatic** : install ansible via the appropriate platform provider
 #   **manual** : don't install anything
 #
 # == Examples
@@ -37,7 +37,7 @@
 # === Deploy an ansible master via the default provider
 #
 # class { 'ansible::master' :
-#   provider  => 'default'
+#   provider  => 'automatic'
 # }
 #
 class ansible::master(
@@ -54,9 +54,9 @@ class ansible::master(
     'pip': {
       include ansible::install
     }
-    'default': {
+    'automatic': {
       class { 'ansible::install':
-        provider => 'default'
+        provider => 'automatic'
       }
     }
     'manual': {
