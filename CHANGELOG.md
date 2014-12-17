@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2014-12-XX Release 3.0.0
+### Improvements
+- option to install ansible with the default package provider of the platform
+- add support for installing ansible via pip for redhat family operating system
+- remove "Unsupported platform" check in the params class 
+
+### Breaking Changes
+- the provider parameter do not support anymore the apt value (use automatic)
+
 ## 2014-12-07 Release 2.1.0
 ### Improvements
 - add support for installing ansible with apt
