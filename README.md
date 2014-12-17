@@ -69,12 +69,12 @@ Or with [Librarian puppet](http://librarian-puppet.com/), for example add to you
 ```
   mod 'ansible',
     :git => 'https://github.com/nvogel/puppet-ansible',
-    :ref => '2.1.0'
+    :ref => '3.0.0'
 ```
 
 Each version number follows the rules defined by [semantic versioning](http://semver.org/).
 
-You should read the changelog file before upgrading to a new version and use only a tagged version with librarian.
+You should read the changelog file before upgrading to a new version and use only a tagged version.
 
 ## How to use the puppet ansible module
 
@@ -90,9 +90,15 @@ You can have several ansible master hosts, each one will have its own pool of an
 
 You have to wait 2 runs of the puppet agent to complete the configuration process.
 
-Ansible is installed by default by pip, the provider parameter could be changed with apt.
+Ansible is installed by default with pip.
+
+You can also use the default package provider of the platform, in this case
+you may have to enable a specific repository where you can find the ansible package (for example wheezy-backport or epel).
+
 
 ##### Plain text manifest
+
+For the master node :
 
 ```puppet
 include ansible
@@ -106,11 +112,11 @@ class { 'ansible':
 }
 ```
 
-or if you want to use the apt provider
+or if you want to use the default (apt/yum) provider
 
 ```puppet
 include { 'ansible::master':
-    provider => apt
+  provider => automatic
 }
 ```
 
@@ -207,7 +213,7 @@ Example with hiera :
 ---
 ansible::ensure: master
 ansible::master: false
-ansible::master::provider: apt
+ansible::master::provider: automatic
 ansible::install::version: latest
 ```
 
@@ -217,7 +223,7 @@ ansible::install::version: latest
 ---
 ansible::ensure: master
 ansible::master: false
-ansible::install::version: "1.8"
+ansible::install::version: "1.8.2"
 ```
 
 ### Manage playbooks
