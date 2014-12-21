@@ -17,7 +17,7 @@
 #  For example : latest, present, x.y.z
 #
 # [*provider*]
-# Provider (**Default : pip**) (**Optional**)
+# Provider (**string**) (**Default : pip**) (**Optional**)
 # Supported values :
 #   **pip** : install ansible via pip
 #   **automatic** : let puppet guess the appropriate provider of the platform

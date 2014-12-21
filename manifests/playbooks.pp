@@ -9,6 +9,12 @@
 # Create a directory for ansible configuration
 # This directory is owned by the ansible user
 #
+# == Parameter
+#
+# [*location*]
+# the playbooks directory path
+# (**string**) (**Default : '/etc/ansible' **) (**Optional**)
+#
 # == Example
 #
 # === Create the /etc/ansible directory

@@ -13,11 +13,14 @@
 # - add all ansible nodes of the pool to the sshd_known_hosts file
 # - install ansible (or not)
 #
-# == Parameter
+# The ansible user created can not use sudo. Redefine (via hiera) the
+# **ansible::user::sudo** parameter to **enable** il you want to change that.
+#
+# == Parameters
 #
 # [*provider*]
 # Provider name used to install Ansible (**Default : pip**) (**Optional**)
-# Supported values :
+# Supported values (**string**) :
 #   **pip** : install ansible via pip
 #   **automatic** : install ansible via the appropriate platform provider
 #   **manual** : don't install anything
