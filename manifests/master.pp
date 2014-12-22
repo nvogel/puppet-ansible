@@ -9,12 +9,10 @@
 # This class enable the following features :
 #
 # - create an ansible user with ssh rsa keys
+# - install/configure sudo
 # - the ansible user public key is exported to all ansible nodes
 # - add all ansible nodes of the pool to the sshd_known_hosts file
 # - install ansible (or not)
-#
-# The ansible user created can not use sudo. Redefine (via hiera) the
-# **ansible::user::sudo** parameter to **enable** il you want to change that.
 #
 # == Parameters
 #
@@ -49,8 +47,10 @@ class ansible::master(
 
   include ansible::params
 
-  # Create ansible user
-  include ansible::user
+  # Create ansible user with sudo
+  class { 'ansible::user' :
+    sudo => 'enable'
+  }
 
   # Install Ansible
   case $ansible::master::provider {

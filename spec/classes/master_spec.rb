@@ -5,7 +5,7 @@ describe 'ansible::master' do
   context "When you add an ansible::master class" do
     let(:facts) { {:osfamily => 'Debian' } }
 
-    it { should contain_class('ansible::user') }
+    it { should contain_class('ansible::user').with('sudo' => 'enable')}
     it { should contain_class('ansible::install') }
     it { should contain_class('ansible::params') }
 
@@ -29,7 +29,7 @@ describe 'ansible::master' do
     let(:facts) { {:osfamily => 'Debian' } }
     let(:params) { {:provider  => 'automatic'} } 
 
-    it 'ansible is present and installed via apt' do
+    it 'ansible is present and installed with the automatic provider' do
       should contain_class('ansible::install').with(
           'provider' => 'automatic'
       )

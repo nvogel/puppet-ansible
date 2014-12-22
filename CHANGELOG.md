@@ -3,12 +3,13 @@ All notable changes to this project will be documented in this file.
 
 ## 2014-12-XX Release 3.0.0
 ### Improvements
-- option to install ansible with the default package provider of the platform
-- add support for installing ansible via pip for redhat family operating system
-- remove "Unsupported platform" check in the params class 
+- you can install ansible with the default package provider of the platform
+- you can install ansible with pip on redhat family operating system
 
 ### Breaking Changes
-- the provider parameter do not support anymore the apt value (use automatic)
+- the ansible::master::provider parameter doesn't support anymore the apt value
+- the ansible user on the master host can use sudo (new default value)
+- remove the check of the os family in the ansible::params class
 
 ## 2014-12-07 Release 2.1.0
 ### Improvements
