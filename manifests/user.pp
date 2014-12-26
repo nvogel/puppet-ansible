@@ -72,8 +72,11 @@ class ansible::user(
     path    => ['/usr/bin'],
     command => 'ssh-keygen -t rsa -q -f /home/ansible/.ssh/id_rsa -N ""',
     creates => '/home/ansible/.ssh/id_rsa',
-    user    => 'ansible'
+    user    => 'ansible',
+    require => Package['openssh-server']
   }
+
+  ensure_packages([ 'openssh-server' ])
 
   # Enable sudo
   if $ansible::user::sudo == 'enable' {

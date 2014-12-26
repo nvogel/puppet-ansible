@@ -17,30 +17,30 @@
 #  For example : latest, present, x.y.z
 #
 # [*provider*]
-# Provider (**Default : pip**) (**Optional**)
+# Provider (**string**) (**Default : pip**) (**Optional**)
 # Supported values :
-#  Any value supported by the provider attribute of the puppet package type
-# Recommended values :
 #   **pip** : install ansible via pip
-#   **apt** : install ansible via apt
+#   **automatic** : let puppet guess the appropriate provider of the platform
 #
 # == Examples
 #
-# === Install ansible if not present via pip provider
+# === Install ansible if not present via the pip provider
 #
 # include ansible::install
 #
-# ==== Install ansible 1.7.2 via pip provider
+# ==== Install ansible 1.8.2 via the pip provider
 #
 # class { 'ansible::install':
-#   version => '1.7.2'
+#   version  => '1.8.2'
 # }
 #
-# ==== Install last version of ansible via apt
+# ==== Install last version of ansible
+#
+# Install ansible with the appropriate provider for your platform
 #
 # class { 'ansible::install':
 #   version  => latest,
-#   provider => apt
+#   provider => automatic
 # }
 #
 class ansible::install(
@@ -50,17 +50,24 @@ class ansible::install(
 
   include ansible::params
 
-  # Install packages
   if $ansible::install::provider == 'pip' {
-    ensure_packages(['python-yaml','python-jinja2','python-paramiko',
-      'python-pkg-resources','python-pip','python-crypto','python-markupsafe',
-      'python-httplib2'], {'before' => Package['ansible']})
-  }
+    # Install ansible with pip
+    if empty($ansible::params::pip_dep_package) {
+      fail('Unsupported platform for pip install ansible')
+    } else {
+      ensure_packages($ansible::params::pip_dep_package,
+        {'before' => Package['ansible']})
 
-  # Install ansible
-  package { 'ansible':
-    ensure   => $ansible::install::version,
-    provider => $ansible::install::provider
+      package { 'ansible':
+        ensure   => $ansible::install::version,
+        provider => 'pip'
+      }
+    }
+  } else {
+    # Install ansible with the default provider
+    package { 'ansible':
+      ensure   => $ansible::install::version
+    }
   }
 
 }

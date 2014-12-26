@@ -16,7 +16,7 @@
 # == Parameter
 #
 # [*master*]
-# The fqdn of the master host (**required**)
+# The fqdn of the master host (**string**) (**required**)
 #
 # == Example
 #

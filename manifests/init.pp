@@ -14,15 +14,19 @@
 # == Parameters
 #
 # [*ensure*]
-# master or node (**string**) (**Default : master*) (**Optional**)
+# master or node (**string**) (**Default : master**) (**Optional**)
 # Supported values :
 #   **master** : deploy an ansible master
 #   **node** : deploy an ansible node
 #
 # [*master*]
 # The fqdn of the master host (**Required** if the host is an ansible **node**)
+# If the node is a master, it has to be set to false (**boolean**).
+# Supported values :
+#   **string** : for a node only, a string set with the master node fqdn
+#   **false**  : for a master only, indicate that there's no associated master
 #
-# == Example
+# == Examples
 #
 # === Create a master node
 #

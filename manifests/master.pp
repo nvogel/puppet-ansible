@@ -9,17 +9,18 @@
 # This class enable the following features :
 #
 # - create an ansible user with ssh rsa keys
+# - install/configure sudo
 # - the ansible user public key is exported to all ansible nodes
 # - add all ansible nodes of the pool to the sshd_known_hosts file
 # - install ansible (or not)
 #
-# == Parameter
+# == Parameters
 #
 # [*provider*]
 # Provider name used to install Ansible (**Default : pip**) (**Optional**)
-# Supported values :
+# Supported values (**string**) :
 #   **pip** : install ansible via pip
-#   **apt** : install ansible via apt
+#   **automatic** : install ansible via the appropriate platform provider
 #   **manual** : don't install anything
 #
 # == Examples
@@ -34,10 +35,10 @@
 #   provider  => 'manual'
 # }
 #
-# === Deploy an ansible master via apt
+# === Deploy an ansible master via the default provider
 #
 # class { 'ansible::master' :
-#   provider  => 'apt'
+#   provider  => 'automatic'
 # }
 #
 class ansible::master(
@@ -46,17 +47,19 @@ class ansible::master(
 
   include ansible::params
 
-  # Create ansible user
-  include ansible::user
+  # Create ansible user with sudo
+  class { 'ansible::user' :
+    sudo => 'enable'
+  }
 
   # Install Ansible
   case $ansible::master::provider {
     'pip': {
       include ansible::install
     }
-    'apt': {
+    'automatic': {
       class { 'ansible::install':
-        provider => 'apt'
+        provider => 'automatic'
       }
     }
     'manual': {

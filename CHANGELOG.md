@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 2014-12-26 Release 3.0.0
+### Improvements
+- you can install ansible with the default package provider
+- you can install ansible with pip on redhat family operating system
+
+### Breaking Changes
+- the ansible::master::provider parameter doesn't support anymore the apt value
+- the master ansible user has by default sudo capability (like an ansible node)
+
 ## 2014-12-07 Release 2.1.0
 ### Improvements
 - add support for installing ansible with apt
