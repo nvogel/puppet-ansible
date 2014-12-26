@@ -34,14 +34,12 @@ In the following :
 
 The goals of the ansible puppet module are :
 
- - to install [Ansible](http://www.ansibleworks.com) on the ansible master
- - to allow ssh connections from the ansible master to a pool of ansible nodes
- - to install and configure sudo on the ansible nodes
+ - installing [Ansible](http://www.ansibleworks.com) on the ansible master
+ - allowing **ssh** connections from the ansible master to a pool of ansible nodes
+ - creating an **ansible user** on all hosts (master and nodes)
+ - allowing the **ansible user** to run command as **root** with **sudo**
+
 The module use **public key authentication** and manage the **/etc/ssh/ssh_known_hosts** file of the ansible master.
-
-On all hosts, an user **ansible** is created.
-
-The ansible user on the master is able to run commands on the ansible nodes as **root** with **sudo**.
 
 ## Requirements
 
