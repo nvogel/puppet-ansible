@@ -23,6 +23,11 @@
 #   **automatic** : install ansible via the appropriate platform provider
 #   **manual** : don't install anything
 #
+# [*common_id*]
+# A common ID between master and managed nodes to exachange exported resources
+# under. Defaults to `$fqdn` on the master side, must be set on the node side.
+# Must match between master and nodes for the module to work.
+#
 # == Examples
 #
 # === Deploy an ansible master
@@ -38,11 +43,18 @@
 # === Deploy an ansible master via the default provider
 #
 # class { 'ansible::master' :
-#   provider  => 'automatic'
+#   provider  => 'automatic',
+# }
+#
+# === Deploy an ansible master using a different resource collection ID
+#
+# class { 'ansible::master' :
+#   common_id => 'ansible01',
 # }
 #
 class ansible::master(
-  $provider = 'pip'
+  $provider = 'pip',
+  $common_id = $::fqdn,
   ){
 
   include ansible::params
@@ -72,16 +84,16 @@ class ansible::master(
 
   # Export ansible user public key if fact is defined
   if ( $::ansible_user_key != undef ) {
-    @@ssh_authorized_key { "ansible_user_${::fqdn}_rsa":
+    @@ssh_authorized_key { "ansible_user_${common_id}_rsa":
       key  => $::ansible_user_key,
       user => 'ansible',
       type => 'rsa',
-      tag  => "ansible_master_${::fqdn}"
+      tag  => "ansible_master_${common_id}"
     }
   }
 
   # Collect ssh host keys from nodes
-  Sshkey <<| tag == "ansible_node_${::fqdn}_rsa" |>>
+  Sshkey <<| tag == "ansible_node_${common_id}_rsa" |>>
 
   # Fix /etc/ssh/ssh_known_hosts permission
   # See http://projects.puppetlabs.com/issues/2014
