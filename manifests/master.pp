@@ -59,9 +59,11 @@ class ansible::master(
 
   include ansible::params
 
-  # Create ansible user with sudo
-  class { 'ansible::user' :
-    sudo => 'enable'
+  if ! defined(Class['ansible::user']) {
+    # Create ansible user with sudo
+    class { 'ansible::user' :
+      sudo => 'enable'
+    }
   }
 
   # Install Ansible
