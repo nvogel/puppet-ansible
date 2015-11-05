@@ -43,7 +43,7 @@ The module use **public key authentication** and manage the **/etc/ssh/ssh_known
 
 ## Requirements
 
-A puppet master with store config enable, because this module use exported ressources.
+A puppet master with "storeconfigs" enabled, because this module use exported ressources.
 
 This module is created for Debian (Squeeze/Wheezy) and compatible with puppet agent (> 2.7).
 
@@ -82,11 +82,11 @@ You should read the changelog file before upgrading to a new version and use onl
 
 Imagine you want to install Ansible on a host named **master.fqdn.tld**.
 
-You can use hieara, an enc, or a plain text manifest.
+You can use hiera, an enc, or a plain text manifest.
 
 You can have several ansible master hosts, each one will have its own pool of ansible nodes.
 
-You have to wait 2 runs of the puppet agent to complete the configuration process.
+You have to make 2 runs of the puppet agent to complete the configuration process.
 
 Ansible is installed by default with pip.
 
