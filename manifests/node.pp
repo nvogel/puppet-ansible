@@ -45,9 +45,11 @@ class ansible::node(
   # Authorize master host to connect via ssh by colleting its public key
   Ssh_authorized_key <<| tag == "ansible_master_${ansible::node::master}" |>>
 
-  # Create ansible user with sudo
-  class { 'ansible::user' :
-    sudo => 'enable'
+  if ! defined(Class['ansible::user']) {
+    # Create ansible user with sudo
+    class { 'ansible::user' :
+      sudo => 'enable'
+    }
   }
 
 }
