@@ -11,10 +11,13 @@ group :test do
   gem "rspec-puppet", '~> 1.0.0'
   gem "puppet-syntax", '~> 1.3.0'
   gem "puppetlabs_spec_helper", '~> 0.8.0'
+  if RUBY_VERSION =~ /^1/
+    gem "json_pure", '~> 1'
+  end
 end
 
 group :development do
-  if RUBY_VERSION !~ /^1.8/
+  if RUBY_VERSION !~ /^1/
     gem "guard-rake"
   end
 end
