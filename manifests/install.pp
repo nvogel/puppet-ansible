@@ -44,6 +44,7 @@
 # }
 #
 class ansible::install(
+  $package = ansible,
   $version = present,
   $provider= pip,
   ){
@@ -65,7 +66,7 @@ class ansible::install(
     }
   } else {
     # Install ansible with the default provider
-    package { 'ansible':
+    package { $ansible::install::package:
       ensure   => $ansible::install::version
     }
   }
